@@ -25,7 +25,7 @@ Use the patched QEMU and SeaBIOS from openstep-qemu, one Pentium virtual CPU,
 
 ```sh
 -drive file=SYSTEM.raw,format=raw,if=none,id=system,cache=writeback
--device virtio-blk-pci-transitional,addr=7,drive=system,bootindex=1
+-device virtio-blk-pci-transitional,addr=7,queue-size=128,drive=system,bootindex=1
 -fw_cfg name=etc/virtio-low-queues,string=on
 -drive file=Openstep-4.2-Intel-User.iso,format=raw,media=cdrom,if=ide,index=0,readonly=on
 ```

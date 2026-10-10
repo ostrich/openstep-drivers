@@ -35,7 +35,7 @@ static unsigned vcTake(struct VCInterrupt *irq)
 {
     unsigned value;__asm__ volatile("xchgl %%eax,%1":"=a"(value),"=m"(irq->pending):"0"(0),"m"(irq->pending):"memory");return value;
 }
-/* One owned 64 KiB pool avoids exhausting the scarce low-memory allocator.
+/* PCI DMA pools use wired kernel memory, preserving conventional memory for ISA audio.
  * Control payloads occupy unused first-page ring padding: metadata ends below
  * offset 1024, and the used list starts at 4096. Data arenas follow four rings.
  * Each ring and each data slot is independently physically validated. */
@@ -44,9 +44,9 @@ static int vcPoolAlloc(struct DMARegion *pool,struct DMARegion *rings,
 {
     unsigned i,j,first,last,off;
     if(PAGE_SIZE!=8192)return 0;
-    pool->allocated=65536;pool->allocation=IOMallocLow(pool->allocated);
+    pool->allocated=65536+PAGE_SIZE-1;pool->allocation=IOMalloc(pool->allocated);
     if(!pool->allocation) { VCLOG(("VirtioConsoleProbe: DMA pool unavailable\n"));return 0; }
-    pool->address=pool->allocation;pool->size=65536;
+    pool->address=(void *)(((unsigned)pool->allocation+PAGE_SIZE-1)&~(PAGE_SIZE-1));pool->size=65536;
     if((unsigned)pool->address&(PAGE_SIZE-1))goto fail;
     memset(pool->address,0,pool->size);
     for(i=0;i<4;i++) {
@@ -73,15 +73,15 @@ static int vcPoolAlloc(struct DMARegion *pool,struct DMARegion *rings,
     return 1;
 fail:
     VCLOG(("VirtioConsoleProbe: DMA pool alignment/translation failed\n"));
-    IOFreeLow(pool->allocation,pool->allocated);memset(pool,0,sizeof(*pool));return 0;
+    IOFree(pool->allocation,pool->allocated);memset(pool,0,sizeof(*pool));return 0;
 }
 static int vcExtraAlloc(struct DMARegion *pool,struct DMARegion *rings,
                          struct DMARegion *buffers,unsigned *rx,unsigned *tx)
 {
     unsigned i,j,off,first,last;
-    pool->allocated=49152;pool->allocation=IOMallocLow(pool->allocated);
+    pool->allocated=49152+PAGE_SIZE-1;pool->allocation=IOMalloc(pool->allocated);
     if(!pool->allocation)return 0;
-    pool->address=pool->allocation;pool->size=pool->allocated;
+    pool->address=(void *)(((unsigned)pool->allocation+PAGE_SIZE-1)&~(PAGE_SIZE-1));pool->size=49152;
     if((unsigned)pool->address&(PAGE_SIZE-1))goto fail;
     memset(pool->address,0,pool->size);
     for(i=0;i<2;i++) {
@@ -102,7 +102,7 @@ static int vcExtraAlloc(struct DMARegion *pool,struct DMARegion *rings,
     }
     return 1;
 fail:
-    IOFreeLow(pool->allocation,pool->allocated);memset(pool,0,sizeof(*pool));return 0;
+    IOFree(pool->allocation,pool->allocated);memset(pool,0,sizeof(*pool));return 0;
 }
 static unsigned vc_port_id(const unsigned char *p)
 { return (unsigned)p[0]|((unsigned)p[1]<<8)|((unsigned)p[2]<<16)|((unsigned)p[3]<<24); }
@@ -442,8 +442,8 @@ done:
     for(i=0;workerRunning && i<2000;i++)IOSleep(1);
     if(workerRunning)IOPanic("VirtioConsole: worker cannot stop safely");
     result=[super free];
-    if(safe && savedPool.allocation)IOFreeLow(savedPool.allocation,savedPool.allocated);
-    if(safe && savedExtra.allocation)IOFreeLow(savedExtra.allocation,savedExtra.allocated);
+    if(safe && savedPool.allocation)IOFree(savedPool.allocation,savedPool.allocated);
+    if(safe && savedExtra.allocation)IOFree(savedExtra.allocation,savedExtra.allocated);
     [savedLock free];
 #ifdef VIRTIO_CONSOLE_TESTING
     IOLog("VirtioConsoleTest: unwind complete safe=%u pool_freed=%u\n",safe,safe && savedPool.allocation!=0);

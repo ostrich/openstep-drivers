@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,13 @@ for name, inputs in [
 ]:
     output = OUT / name
     run([cc, '-std=gnu89', '-Wall', '-Wextra', '-Werror', *inputs, '-o', str(output)])
+    run([str(output)])
+if sys.platform == 'linux':
+    output = OUT / 'native-dma-test'
+    run([cc, '-std=gnu89', '-Wall', '-Wextra', '-Werror', '-Wno-deprecated',
+         '-Wno-pointer-to-int-cast', '-Wno-int-to-pointer-cast',
+         '-Ivirtio/tests/native-dma-stubs', 'virtio/tests/native-dma-test.c',
+         '-o', str(output)])
     run([str(output)])
 run(['python3', 'scripts/check-host-clients.py'])
 run(['python3', 'eide-busmaster/test-package.py'])

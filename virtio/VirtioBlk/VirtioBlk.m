@@ -591,9 +591,9 @@ finish:
     }
     result=[super free]; /* Inherited worker slot is empty; owned worker exited. */
     if(safe) {
-        if(savedRing.allocation)IOFreeLow(savedRing.allocation,savedRing.allocated);
-        if(savedBuffer.allocation)IOFreeLow(savedBuffer.allocation,savedBuffer.allocated);
-        if(savedExtra.allocation)IOFreeLow(savedExtra.allocation,savedExtra.allocated);
+        dma_free(&savedRing);
+        dma_free(&savedBuffer);
+        dma_free(&savedExtra);
     }
     [savedRequest unlock];[savedRequest free];[savedState free];[savedCompletion free];
 #ifdef VIRTIO_BLK_TESTING

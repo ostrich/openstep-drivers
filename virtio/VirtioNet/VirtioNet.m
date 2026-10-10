@@ -46,7 +46,7 @@ static unsigned netPending(struct NetIRQState *irq)
     IONetbufQueue *backlog;
     enet_addr_t mac;
     struct NetIRQState irqState;
-    struct DMARegion rings[2],buffers[2];
+    struct DMARegion pools[2],rings[2],buffers[2];
     struct vq queues[2];
     unsigned slotForHead[2][VQ_MAX];
     unsigned char txBusy[NET_SLOTS];
@@ -99,7 +99,7 @@ static unsigned netPending(struct NetIRQState *irq)
 - initFromDeviceDescription:description
 {
     IOPCIConfigSpace pci;
-    unsigned i,n;
+    unsigned i,n,bytes;
     /* IOEthernet creates its command-serving worker. Its synchronous command-4
      * teardown must precede reclaiming any driver state or DMA allocations. */
     if(![super initFromDeviceDescription:description])return nil;
@@ -122,11 +122,17 @@ static unsigned netPending(struct NetIRQState *irq)
     if(((unsigned char *)&mac)[0]&1)goto fail;
     for(i=0;i<2;i++) {
         wr16(port+VT_QUEUE_SELECT,i);n=rd16(port+VT_QUEUE_SIZE);
-        if(n<2*NET_SLOTS || !dma_alloc(&rings[i],vq_bytes(n)))goto fail;
+        bytes=vq_bytes(n);
+        if(n<2*NET_SLOTS || !bytes || bytes>65536-NET_SLOTS*NET_STRIDE ||
+           !dma_alloc(&pools[i],bytes+NET_SLOTS*NET_STRIDE))goto fail;
+        /* One owner per direction. Queue and frame arenas are disjoint views;
+         * conventional DMA allocates 64 KiB even for a small ring request. */
+        rings[i].address=pools[i].address;rings[i].physical=pools[i].physical;rings[i].size=bytes;
 #ifdef VIRTIO_NET_TESTING
         if([self testFault:i?"Ring1":"Ring0"])goto fail;
 #endif
-        if(!dma_alloc(&buffers[i],NET_SLOTS*NET_STRIDE))goto fail;
+        buffers[i].address=(char *)pools[i].address+bytes;
+        buffers[i].physical=pools[i].physical+bytes;buffers[i].size=NET_SLOTS*NET_STRIDE;
 #ifdef VIRTIO_NET_TESTING
         if([self testFault:i?"Buffer1":"Buffer0"])goto fail;
 #endif
@@ -355,7 +361,7 @@ fail:
 }
 - free
 {
-    struct DMARegion savedRings[2],savedBuffers[2];
+    struct DMARegion savedPools[2];
     id savedLock=stateLock,savedBacklog=backlog,result;
     BOOL safe;
     unsigned i;
@@ -364,14 +370,13 @@ fail:
     IOLog("VirtioNetTest: unwind %s, DMA reset safe %u\n",testFailure?testFailure:"none",safe);
     if(testFailure) { [[[self deviceDescription] configTable] freeString:testFailure];testFailure=0; }
 #endif
-    for(i=0;i<2;i++) { savedRings[i]=rings[i];savedBuffers[i]=buffers[i]; }
+    for(i=0;i<2;i++) { savedPools[i]=pools[i]; }
     if(configured && safe)[self setPCIConfigData:originalCommand atRegister:4];
     /* IOEthernet command-4 is synchronous and the worker performs no accesses
      * to this object after acknowledging its final command (kernel verified). */
     result=[super free];
     if(safe)for(i=0;i<2;i++) {
-        if(savedRings[i].allocation)IOFreeLow(savedRings[i].allocation,savedRings[i].allocated);
-        if(savedBuffers[i].allocation)IOFreeLow(savedBuffers[i].allocation,savedBuffers[i].allocated);
+        dma_free(&savedPools[i]);
     }
     [savedBacklog free];[savedLock free];
 #ifdef VIRTIO_NET_TESTING

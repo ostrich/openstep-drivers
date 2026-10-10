@@ -14,7 +14,8 @@ recovery and system boot are verified under KVM and TCG.
 
 Requirements
 QEMU pc/i440fx, one virtual CPU, transitional virtio PCI with legacy INTx,
-512-byte logical sectors, a 256-entry queue and a backend supporting FLUSH.
+512-byte logical sectors and a backend supporting FLUSH. Use a 128-entry
+queue to conserve DMA memory when running several virtio devices together.
 One disk per controller; capacity must fit 32-bit sector addressing (under
 2 TiB). Validation uses 2 GiB system and 64 MiB data disks; larger filesystems
 were not tested. Tests use the project's patched QEMU 11.1.1 under KVM and TCG.
@@ -42,10 +43,10 @@ Host configuration
 PCI slot 7 must be free. Instance0.table's Location must match
 "Dev:7 Func:0 Bus:0". For a secondary disk, add:
     -drive if=none,id=vdisk,file=DATA.raw,format=raw,cache=writeback
-    -device virtio-blk-pci-transitional,addr=7,drive=vdisk
+    -device virtio-blk-pci-transitional,addr=7,queue-size=128,drive=vdisk
 For system boot, replace the IDE hard-disk attachment with:
     -drive if=none,id=vdisk,file=SYSTEM.raw,format=raw,cache=writeback
-    -device virtio-blk-pci-transitional,addr=7,drive=vdisk,bootindex=1
+    -device virtio-blk-pci-transitional,addr=7,queue-size=128,drive=vdisk,bootindex=1
     -bios VirtioBlk-firmware/bios.bin
     -fw_cfg name=etc/virtio-low-queues,string=on
 Keep the remaining machine/device options. Do not attach the same image

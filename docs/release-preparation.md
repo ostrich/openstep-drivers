@@ -5,11 +5,13 @@ READMEs. All eight native driver/service packages were rebuilt with OPENSTEP's
 Developer Tools; EIDE was repackaged from the verified original driver and
 reproducible binary patch. See [rebuild records](rebuild-20261010.json).
 
-Every installed file matches its previously tested release byte for byte.
-Existing KVM/TCG boot, integrity and sustained-load validation therefore applies
-to the rebuilt binaries. No new runtime or sustained-load tests were performed
-for this rebuild. Portable checks and native payload inspection were rerun.
-The separately validated SeaBIOS binary and corresponding source were reused.
+The virtio packages were subsequently rebuilt with DMA allocation fixes for
+combined VirtioBlk, VirtioNet, VirtioRNG, VirtioConsole and SB16 operation.
+Those binaries passed fresh KVM and TCG boot, transfer-integrity, entropy,
+PTY, SSH/SFTP and captured audio tests. Unchanged packages retain the prior
+byte-identical payload validation. The VirtioBlk floppy was regenerated with
+the updated driver and checked offline; a fresh installer run was not repeated.
+See [combined-device validation](virtio-dma-integration.md).
 
 Future release work:
 

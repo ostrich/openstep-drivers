@@ -258,8 +258,8 @@ fail:
     }
     result=[super free]; /* Inherited worker slot is empty; owned worker exited. */
     if(safe) {
-        if(savedRing.allocation)IOFreeLow(savedRing.allocation,savedRing.allocated);
-        if(savedBuffer.allocation)IOFreeLow(savedBuffer.allocation,savedBuffer.allocated);
+        dma_free(&savedRing);
+        dma_free(&savedBuffer);
     }
     [savedRequest free];[savedState free];
 #ifdef VIRTIO_RNG_TESTING
