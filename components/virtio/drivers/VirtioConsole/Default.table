@@ -1,0 +1,14 @@
+"Title" = "Virtio Console Channel";
+"Bus Type" = "PCI";
+"Family" = "Other";
+"Version" = "0.2";
+"Auto Detect IDs" = "0x10031af4";
+"Instance" = "0";
+"Driver Name" = "VirtioConsole";
+"DMA Channels" = "";
+"IRQ Levels" = "";
+"Share IRQ Levels" = "Yes";
+"I/O Ports" = "";
+"Location" = "Dev:9 Func:0 Bus:0";
+"Server Name" = "VirtioConsole";
+"Class Names" = "VirtioConsole";

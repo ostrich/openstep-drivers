@@ -1,0 +1,30 @@
+#!/bin/sh
+# MIT license. Apply independently configured native service startup.
+set -e
+config=/usr/local/etc/openstep-services.conf
+bin=/usr/local/sbin
+OPENSTEP_GUEST_AGENT=NO
+OPENSTEP_PTY=NO
+OPENSTEP_PTY_SHELL=/bin/csh
+if [ -f "$config" ]; then . "$config"; fi
+case "$OPENSTEP_GUEST_AGENT:$OPENSTEP_PTY" in
+    YES:YES|YES:NO|NO:YES|NO:NO) ;; *) echo 'Service settings must be YES or NO.' >&2; exit 2;;
+esac
+case "$OPENSTEP_PTY_SHELL" in /*) ;; *) echo 'PTY shell must be an absolute path.' >&2; exit 2;; esac
+[ "$#" -ge 1 ] && [ "$#" -le 2 ] || { echo 'Usage: openstep-services start|stop|status [all|agent|pty]' >&2; exit 2; }
+action=$1
+target=${2-all}
+case "$action" in start|stop|status) ;; *) echo 'Unknown service action.' >&2; exit 2;; esac
+case "$target" in all|agent|pty) ;; *) echo 'Unknown service target.' >&2; exit 2;; esac
+result=0
+if [ "$target" = all ] || [ "$target" = agent ]; then
+    if [ "$action" != start ] || [ "$OPENSTEP_GUEST_AGENT" = YES ]; then
+        if "$bin/openstep-qga" --"$action"; then :; else result=$?; fi
+    fi
+fi
+if [ "$target" = all ] || [ "$target" = pty ]; then
+    if [ "$action" != start ] || [ "$OPENSTEP_PTY" = YES ]; then
+        if "$bin/openstep-pty" --"$action" --shell "$OPENSTEP_PTY_SHELL"; then :; else result=$?; fi
+    fi
+fi
+exit "$result"

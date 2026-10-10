@@ -1,0 +1,11 @@
+"Title" = "Virtio Entropy Device";
+"Bus Type" = "PCI";
+"Family" = "Other";
+"Version" = "0.1";
+"Auto Detect IDs" = "0x10051af4";
+"Instance" = "0";
+"Driver Name" = "VirtioRNG";
+"DMA Channels" = "";
+"IRQ Levels" = "10";
+"Share IRQ Levels" = "Yes";
+"I/O Ports" = "0xc080-0xc09f";

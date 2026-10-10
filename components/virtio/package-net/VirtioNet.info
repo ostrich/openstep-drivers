@@ -1,0 +1,12 @@
+Title           Virtio Ethernet Adapter
+Version         OPENSTEP for Mach 4.2, VirtioNet 0.1
+Description     Native Ethernet driver for QEMU's transitional virtio PCI device. Includes a status/reset command-line tool. Install at / and follow README.txt to configure and activate.
+DefaultLocation /
+DiskName        VirtioNet
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

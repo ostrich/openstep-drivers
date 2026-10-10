@@ -1,0 +1,19 @@
+"Title" = "VMWare FB Adapter";
+"Bus Type" = "PCI";
+"Family" = "Display";
+"Version" = "1.00";
+"Auto Detect IDs" = "0x040515ad 0x071015ad";
+"Instance" = "0";
+"Driver Name" = "VMWareFB";
+"DMA Channels" = "";
+"IRQ Levels" = "";
+"I/O Ports" = "0x4560-0x456b";
+"Memory Maps" = "0xd0000000-0xd0ffffff 0xa0000-0xbffff 0xc0000-0xcffff";
+"VGA Memory Maps" = "0xa0000-0xbffff 0xc0000-0xcffff";
+"Display Mode" = "Height: 1200 Width: 1600 Refresh: 60Hz ColorSpace: RGB:888/32";
+"VMWare Acceleration" = "Default";
+"VMWare Acceleration Values" = "None Default Cursor";
+
+"PostScript Driver" = "/usr/lib/NextStep/Displays/VMWareFB_psdrvr";
+
+"Framebuffer Cache" = "CopyBack";

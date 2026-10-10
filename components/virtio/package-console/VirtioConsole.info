@@ -1,0 +1,12 @@
+Title           Virtio Console Channel
+Version         OPENSTEP for Mach 4.2, VirtioConsole 0.2
+Description     One or two bidirectional binary channels for QEMU transitional virtio-serial. Includes a bounded native stream utility. Install at / and follow README.txt to activate.
+DefaultLocation /
+DiskName        VirtioConsole
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

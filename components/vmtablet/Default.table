@@ -1,0 +1,11 @@
+"Title" = "VMware Absolute Pointer";
+"Family" = "Pointing Device";
+"Version" = "0.2";
+"Instance" = "0";
+"Driver Name" = "VMTablet";
+"Server Name" = "VMTablet";
+"Class Names" = "VMTablet";
+"IRQ Levels" = "";
+"I/O Ports" = "";
+"Memory Maps" = "";
+"DMA Channels" = "";

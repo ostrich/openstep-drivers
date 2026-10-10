@@ -1,0 +1,12 @@
+Title           EIDE 4.03 with PCI Bus Master Initialization
+Version         OPENSTEP for Mach 4.2, EIDE 4.03 + Bus Master Patch 1
+Description     EIDE 4.03 with a PCI bus-master initialization fix tested on QEMU PIIX3. Select Intel PIIX in Configure.app and enable Bus Master DMA. Install at /. Reboot after saving the configuration. This installs the driver catalog; it does not change your active controller automatically. Original EIDE files are retained separately for rollback. Other hardware is untested.
+DefaultLocation /
+DiskName        EIDEBusMaster
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

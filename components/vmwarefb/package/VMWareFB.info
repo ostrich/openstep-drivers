@@ -1,0 +1,12 @@
+Title           VMware SVGA Display Driver
+Version         OPENSTEP for Mach 4.2, VMWareFB Driver 0.1 (experimental)
+Description     Accelerated true-color display driver for QEMU VMware SVGA. Includes the WindowServer display adapter. Install at /, select VMware Display Adapter in Configure, save, shut down cleanly and restart QEMU with -vga vmware. See README.txt for requirements and rollback.
+DefaultLocation /
+DiskName        VMWareFB
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

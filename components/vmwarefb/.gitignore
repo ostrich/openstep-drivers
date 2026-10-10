@@ -1,0 +1,7 @@
+*.o
+VMWareFB.config/
+tests/probe
+VMWareFB_psdrvr
+
+/policy-tests
+.work-build-test/

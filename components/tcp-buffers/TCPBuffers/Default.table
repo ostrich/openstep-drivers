@@ -1,0 +1,12 @@
+"Title" = "TCP Buffer Defaults";
+"Family" = "Other";
+"Version" = "0.1";
+"Instance" = "0";
+"Driver Name" = "TCPBuffers";
+"Server Name" = "TCPBuffers";
+"Class Names" = "TCPBuffers";
+"IRQ Levels" = "";
+"I/O Ports" = "";
+"Memory Maps" = "";
+"DMA Channels" = "";
+"Apply TCP Defaults" = "No";

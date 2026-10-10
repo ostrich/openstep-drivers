@@ -1,0 +1,13 @@
+work/
+build/
+dist/
+__pycache__/
+*.py[cod]
+*.o
+*.raw
+*.qcow2
+*.iso
+*.sock
+*.log
+*.config/
+/VMWareFB_psdrvr

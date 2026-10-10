@@ -1,0 +1,12 @@
+Title           Virtio Block Controller
+Version         OPENSTEP for Mach 4.2, VirtioBlk 0.1
+Description     Native block driver for QEMU transitional virtio PCI disks. Includes a status/reset command-line tool. Install at / and follow README.txt to configure and activate.
+DefaultLocation /
+DiskName        VirtioBlk
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

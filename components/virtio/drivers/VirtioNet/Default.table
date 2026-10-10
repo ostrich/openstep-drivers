@@ -1,0 +1,14 @@
+"Title" = "Virtio Ethernet Adapter";
+"Bus Type" = "PCI";
+"Family" = "Network";
+"Version" = "0.1";
+"Auto Detect IDs" = "0x10001af4";
+"Instance" = "0";
+"Driver Name" = "VirtioNet";
+"Server Name" = "VirtioNet";
+"Class Names" = "VirtioNet";
+"Location" = "Dev:6 Func:0 Bus:0";
+"DMA Channels" = "";
+"IRQ Levels" = "";
+"Share IRQ Levels" = "Yes";
+"I/O Ports" = "";

@@ -1,0 +1,12 @@
+Title           Virtio Entropy Device
+Version         OPENSTEP for Mach 4.2, VirtioRNG 0.1
+Description     Experimental entropy driver for QEMU's transitional virtio PCI device. Includes a bounded command-line reader. Install at / and follow README.txt to activate and cold-boot. Does not feed PRNGD or replace system randomness interfaces.
+DefaultLocation /
+DiskName        VirtioRNG
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

@@ -1,0 +1,12 @@
+Title           VMware Absolute Pointer
+Version         OPENSTEP for Mach 4.2, VMTablet Driver 0.2 (prototype)
+Description     Absolute pointer driver tested with QEMU's VMware mouse interface. Install at /, then configure VMware Absolute Pointer and deselect PS2Mouse. Save and cold-boot. Requires vmport=on; GTK is recommended for host pointer release. Supports one display and left/right buttons. Wheel and middle button are not implemented. See README.txt for setup and rollback.
+DefaultLocation /
+DiskName        VMTablet
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

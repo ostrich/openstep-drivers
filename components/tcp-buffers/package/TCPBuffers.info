@@ -1,0 +1,12 @@
+Title           TCP Buffer Defaults
+Version         OPENSTEP for Mach 4.2, TCPBuffers 0.1
+Description     Optional 32 KiB system TCP defaults. Includes status and next-boot configuration tools. Install at / and follow README.txt to enable.
+DefaultLocation /
+DiskName        TCPBuffers
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES

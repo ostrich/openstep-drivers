@@ -1,0 +1,15 @@
+"Title" = "Virtio Block Controller";
+"Bus Type" = "PCI";
+"Family" = "SCSI";
+"Version" = "0.1";
+"Auto Detect IDs" = "0x10011af4";
+"Instance" = "0";
+"Driver Name" = "VirtioBlk";
+"DMA Channels" = "";
+"IRQ Levels" = "";
+"Share IRQ Levels" = "Yes";
+"I/O Ports" = "";
+"Server Name" = "VirtioBlk";
+"Class Names" = "VirtioBlk";
+"Location" = "Dev:7 Func:0 Bus:0";
+"Boot Driver";

@@ -1,0 +1,12 @@
+Title           OPENSTEP Virtio Services
+Version         OPENSTEP for Mach 4.2, services 0.1
+Description     Standard QEMU guest agent and a separate interactive terminal service. Each can be enabled independently. Requires the two-port VirtioConsole driver. Install at / and follow README.txt before enabling startup.
+DefaultLocation /
+DiskName        OpenStepVirtioServices
+Relocatable     NO
+Application     NO
+LibrarySubdirectory Standard
+InstallOnly     YES
+DisableStop     YES
+LongFilenames   NO
+NeedsAuthorization YES
