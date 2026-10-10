@@ -136,7 +136,16 @@ class Tests(unittest.TestCase):
                     readable, _, _ = select.select([slave], [], [], 2)
                     self.assertEqual(readable, [slave], 'Restored terminal cannot read a line')
                     self.assertEqual(os.read(slave, 1024), b'restored input\n')
-                    self.assertEqual(fcntl.fcntl(slave, fcntl.F_GETFL), flags)
+                    restored_flags = fcntl.fcntl(slave, fcntl.F_GETFL)
+                    expected_flags = flags
+                    if sys.platform == 'darwin':
+                        # XNU exposes FWASWRITTEN after stdout/stderr writes.
+                        # This kernel-owned history bit cannot be restored with F_SETFL.
+                        # https://github.com/apple-oss-distributions/xnu/blob/main/bsd/sys/fcntl.h
+                        written = 0x00010000
+                        restored_flags &= ~written
+                        expected_flags &= ~written
+                    self.assertEqual(restored_flags, expected_flags)
                     if ending == 'exit':
                         output = bytearray()
                         while select.select([master], [], [], .05)[0]:

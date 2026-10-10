@@ -50,5 +50,7 @@ python3 scripts/check-host-clients.py
 ```
 
 The macOS terminal test allows XNU's transient PENDIN state after restoring
-canonical input; it still compares all other terminal settings, descriptor
-flags and successful line input. CI does not compile or boot native drivers.
+canonical input and its kernel-owned FWASWRITTEN descriptor history bit. It
+still compares all other terminal settings and descriptor flags, including
+nonblocking mode, and verifies successful line input. CI does not compile or
+boot native drivers.
