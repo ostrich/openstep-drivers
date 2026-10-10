@@ -28,5 +28,4 @@ replace the patched executable.
 
 `test-patch.py ORIGINAL_EIDE_reloc` executes the patch under mocked PCI APIs
 using Python Unicorn. It supplements guest validation. See
-[release preparation](../../docs/release-preparation.md) for the known package
-ownership validation issue.
+[release preparation](../../docs/release-preparation.md) for package repair and validation details.

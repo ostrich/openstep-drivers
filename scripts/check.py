@@ -43,4 +43,5 @@ for name, inputs in [
     run([str(output)])
 for name in ('agent-client-test.py', 'pty-client-test.py', 'pty-terminal-test.py'):
     run(['python3', 'components/virtio/tests/' + name])
+run(['python3', 'tests/test-eide-package.py'])
 print('Portable source, build-input and protocol checks passed')

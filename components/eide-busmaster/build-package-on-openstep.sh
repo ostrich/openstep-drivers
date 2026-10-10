@@ -21,17 +21,23 @@ work=$4
 /bin/mkdir "$work/stage"
 /bin/chgrp wheel "$work/stage"
 /bin/cp "$info" "$work/EIDEBusMaster.info"
+/usr/ucb/zcat "$original/EIDE.tar.Z" > "$work/original.tar"
 cd "$work/stage"
-/usr/ucb/zcat "$original/EIDE.tar.Z" | /NextAdmin/Installer.app/installer_bigtar xf -
+gnutar xf "$work/original.tar"
 bundle="$work/stage/private/Drivers/i386/EIDE.config"
-[ -f "$bundle/EIDE_reloc" ]
+[ -s "$bundle/EIDE_reloc" ]
 /bin/cp "$bundle/EIDE_reloc" "$bundle/EIDE_reloc.original"
 /bin/cp "$patched" "$bundle/EIDE_reloc"
 /bin/chmod 644 "$bundle/EIDE_reloc" "$bundle/EIDE_reloc.original"
+/bin/chgrp -R wheel "$work/stage"
 cd "$work"
 /NextAdmin/Installer.app/package stage EIDEBusMaster.info
 [ -f "$work/EIDEBusMaster.pkg/EIDEBusMaster.bom" ]
 [ -f "$work/EIDEBusMaster.pkg/EIDEBusMaster.tar.Z" ]
 /usr/ucb/zcat "$work/EIDEBusMaster.pkg/EIDEBusMaster.tar.Z" > "$work/payload.tar"
 /NextAdmin/Installer.app/installer_tar tf "$work/payload.tar" > "$work/payload-files.txt"
+# The package tool can succeed after a failed/empty extraction. Require both
+# executables in the generated native payload, not only in the staging tree.
+/usr/bin/grep 'private/Drivers/i386/EIDE.config/EIDE_reloc$' "$work/payload-files.txt"
+/usr/bin/grep 'private/Drivers/i386/EIDE.config/EIDE_reloc.original$' "$work/payload-files.txt"
 /usr/local/ssl/bin/openssl dgst -sha256 "$bundle/EIDE_reloc" "$bundle/EIDE_reloc.original"

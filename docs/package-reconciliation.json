@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "native_binaries_recompiled": false,
+  "packages": {
+    "EIDE-4.03-BusMaster-1.pkg.I.tar.gz": {
+      "sha256": "82c41c2157153acb67eb8fcbccc683a6a240c2f582e26709ccc0de45eae5dc4d",
+      "files": 5
+    },
+    "OpenStepVirtioServices-0.1.pkg.I.tar.gz": {
+      "sha256": "0d24604c3ff64016facd93215d22d528f14d2e83b75c25af769a075834437fcc",
+      "files": 69
+    }
+  },
+  "services_native_package_files_unchanged": 8,
+  "services_current_clients_verified": true,
+  "eide_original_sha256": "8d9bc6da3a57f53a57d68e44e3b2a9d67707a5fe881a06477c35f94a217552a5",
+  "eide_patched_sha256": "aa3582fdafa70ee62f2384ee66632d5879f2ffd70851ce0b2b9f0c37a71f6f12",
+  "eide_patch_reproduced_from_original": true
+}

@@ -60,6 +60,10 @@ for file in top.rglob('*'):
     if not file.is_file() or '.pkg' in str(file.relative_to(top)):continue
     text=file.read_text()
     assert '/home/' not in text and '/run/media/' not in text and '/users/' not in text.lower(),file
+identity={'schema':1,'native_binaries_recompiled':False,
+          'native_source_sha256':{**console['source_sha256'],**services['source_sha256']},
+          'host_client_sha256':{name:digest(SRC/'tools'/name) for name in ('agent-client.py','pty-client.py')}}
+(top/'BUILD.json').write_text(json.dumps(identity,indent=2)+'\n')
 hashes={str(f.relative_to(top)):digest(f) for f in sorted(top.rglob('*')) if f.is_file()}
 (top/'SHA256.json').write_text(json.dumps(hashes,indent=2)+'\n')
 archive=output/(top.name+'.pkg.I.tar.gz')
@@ -72,5 +76,6 @@ with archive.open('wb') as raw,gzip.GzipFile(filename='',mode='wb',fileobj=raw,m
 with tarfile.open(archive,'r:gz') as tar:
     members=tar.getmembers();assert all(m.isfile() or m.isdir() for m in members)
     for name,expected in hashes.items():assert hashlib.sha256(tar.extractfile(top.name+'/'+name).read()).hexdigest()==expected
+archive.with_name(archive.name+'.sha256').write_text(digest(archive)+'  '+archive.name+'\n')
 (output/'audit.json').write_text(json.dumps({'archive_sha256':digest(archive),'files':len(hashes)+1,'native_sources_match':True,'archive_payload_hashes_verified':True,'private_path_scan_passed':True},indent=2)+'\n')
 print(archive)
