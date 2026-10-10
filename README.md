@@ -23,7 +23,8 @@ down cleanly before changing the host's hardware configuration.
 The virtio drivers use transitional PCI devices with the legacy interface,
 INTx interrupts and one virtual CPU. VirtioBlk boot requires patched SeaBIOS
 with low-memory queues enabled. Use the [OPENSTEP QEMU build](https://github.com/ostrich/openstep-qemu)
-and the device options in each README. Other hypervisors are untested.
+and the device options in each README. A [VirtioBlk driver floppy](docs/driver-floppy.md)
+can expose a blank virtio disk to the installer. Other hypervisors are untested.
 VMTablet currently implements the VMware mouse interface, not VirtualBox VMMDev.
 
 ## Building

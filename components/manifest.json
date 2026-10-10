@@ -55,7 +55,9 @@
       "build": "components/virtio/drivers/VirtioBlk/Makefile",
       "package": "components/virtio/package-blk/build-on-openstep.sh",
       "distribute": "components/virtio/package-blk/distribute.py",
-      "archive": "VirtioBlk-0.1.pkg.I.tar.gz"
+      "archive": "VirtioBlk-0.1.pkg.I.tar.gz",
+      "driver_floppy_builder": "scripts/make-virtio-blk-floppy.py",
+      "driver_floppy": "VirtioBlk-0.1-driver.img"
     },
     {
       "name": "virtio-services",

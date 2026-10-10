@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "verified_date": "2026-10-10",
+  "os": "OPENSTEP 4.2 Intel base installation",
+  "accelerator": "kvm",
+  "cpu": "pentium",
+  "cpus": 1,
+  "ram_mib": 64,
+  "disk_mib": 2048,
+  "virtio_pci_slot": 7,
+  "cdrom_interface": "IDE primary master (index 0)",
+  "driver_binary_sha256": "4f677a026f1c6c1a36d55f289f948de66b3af21b7fd5eb4c47b905d40702a9b2",
+  "floppy_sha256": "f1683f2869229ee0efcf7e77b1fede17b72a1c531774d78239a64d9077eaef8d",
+  "bios_sha256": "ac109d128d62a0f2a6d7e70b0f55cc911f728467edcea2967db786562c47454a",
+  "stock_driver_floppy_sha256": "1a95c61b33ae2d5430541b080cd8e03f60e8ed66e02910617c127e65d5ad8f20",
+  "checks": {
+    "blank_disk_detected": true,
+    "native_partition_and_format": true,
+    "base_copy_complete": true,
+    "graphical_installer_success": true,
+    "floppy_free_workspace_boot": true,
+    "native_bootstrap_commands_verified": true,
+    "native_setup_helper_existing_driver_case": true,
+    "native_kernel_file_copy_compare": true,
+    "helper_floppy_free_workspace_boot": true,
+    "clean_guest_shutdown": true,
+    "readonly_fsck_clean": true
+  },
+  "scope": {
+    "tcg_direct_install_tested": false,
+    "new_native_driver_compilation": false,
+    "existing_vms_modified": false,
+    "helper_initial_missing_driver_branch": "native copy command verified during installation; full helper separately tested on installed copy"
+  }
+}
