@@ -15,7 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15]
+        # Queue code uses x86 instructions, matching the OPENSTEP target.
+        os: [ubuntu-24.04, macos-15-intel]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     steps:
