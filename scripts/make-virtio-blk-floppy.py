@@ -63,7 +63,7 @@ def main():
                 path.chmod(0o644)
             for name, data in files.items():
                 assert (target/name).read_bytes() == data
-            helper = Path(__file__).resolve().parents[1]/'components/virtio/package-blk/configure-install.sh'
+            helper = Path(__file__).resolve().parents[1]/'virtio/package-blk/configure-install.sh'
             shutil.copyfile(helper, mount/'configure-install.sh')
             (mount/'configure-install.sh').chmod(0o644)
         finally:

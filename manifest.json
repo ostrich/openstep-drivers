@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "components": [
+    {
+      "name": "vmtablet",
+      "root": "vmtablet",
+      "build": "vmtablet/Makefile",
+      "package": "vmtablet/package/build-on-openstep.sh",
+      "distribute": "vmtablet/package/distribute.py",
+      "archive": "VMTablet-0.2.pkg.I.tar.gz"
+    },
+    {
+      "name": "vmwarefb",
+      "root": "vmwarefb",
+      "build": "vmwarefb/Makefile",
+      "package": "vmwarefb/package/build-on-openstep.sh",
+      "distribute": "vmwarefb/package/distribute.py",
+      "archive": "VMWareFB-0.1.pkg.I.tar.gz"
+    },
+    {
+      "name": "eide-busmaster",
+      "root": "eide-busmaster",
+      "build": "eide-busmaster/patch.py",
+      "package": "eide-busmaster/build-package-on-openstep.sh",
+      "distribute": "eide-busmaster/distribute-package.py",
+      "archive": "EIDE-4.03-BusMaster-1.pkg.I.tar.gz"
+    },
+    {
+      "name": "tcp-buffers",
+      "root": "tcp-buffers",
+      "build": "tcp-buffers/TCPBuffers/Makefile",
+      "package": "tcp-buffers/package/build-on-openstep.sh",
+      "distribute": "tcp-buffers/package/distribute.py",
+      "archive": "TCPBuffers-0.1.pkg.I.tar.gz"
+    },
+    {
+      "name": "virtio-rng",
+      "root": "virtio",
+      "build": "virtio/VirtioRNG/Makefile",
+      "package": "virtio/package/build-on-openstep.sh",
+      "distribute": "virtio/package/distribute.py",
+      "archive": "VirtioRNG-0.1.pkg.I.tar.gz"
+    },
+    {
+      "name": "virtio-net",
+      "root": "virtio",
+      "build": "virtio/VirtioNet/Makefile",
+      "package": "virtio/package-net/build-on-openstep.sh",
+      "distribute": "virtio/package-net/distribute.py",
+      "archive": "VirtioNet-0.1.pkg.I.tar.gz"
+    },
+    {
+      "name": "virtio-blk",
+      "root": "virtio",
+      "build": "virtio/VirtioBlk/Makefile",
+      "package": "virtio/package-blk/build-on-openstep.sh",
+      "distribute": "virtio/package-blk/distribute.py",
+      "archive": "VirtioBlk-0.1.pkg.I.tar.gz",
+      "driver_floppy_builder": "scripts/make-virtio-blk-floppy.py",
+      "driver_floppy": "VirtioBlk-0.1-driver.img"
+    },
+    {
+      "name": "virtio-services",
+      "root": "virtio",
+      "build": "virtio/services/Makefile",
+      "package": "virtio/package-services/build-on-openstep.sh",
+      "distribute": "virtio/tools/assemble-services-distribution.py",
+      "archive": "OpenStepVirtioServices-0.1.pkg.I.tar.gz"
+    }
+  ]
+}

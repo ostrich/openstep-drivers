@@ -4,6 +4,6 @@
 *.tar.Z binary
 *.rtf binary
 # Preserve formatting in imported upstream reference and source files.
-components/vmwarefb/README.vmware whitespace=-space-before-tab
-components/vmwarefb/vmwareFB_reloc.tproj/VMWareFBUtility.m whitespace=-blank-at-eof
-components/vmwarefb/vmwareFB_reloc.tproj/vmware.c whitespace=-blank-at-eof
+vmwarefb/README.vmware whitespace=-space-before-tab
+vmwarefb/vmwareFB_reloc.tproj/VMWareFBUtility.m whitespace=-blank-at-eof
+vmwarefb/vmwareFB_reloc.tproj/vmware.c whitespace=-blank-at-eof

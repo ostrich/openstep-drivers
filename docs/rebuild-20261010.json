@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "source_snapshot_sha256": "8caf9dcbac0a653a9468be8bfa8ad4e1ffa69492fe5a83bd8eef6eb7147e3fb8",
+  "compiler": "NeXT cc-744.13, GCC 2.7.2.1",
+  "native_builder": "OPENSTEP 4.2 Intel Developer Tools, QEMU KVM",
+  "fresh_runtime_tests": false,
+  "runtime_validation": "Prior evidence retained through byte-identical installed payload comparison",
+  "firmware_rebuilt": false,
+  "archives": {
+    "EIDE-4.03-BusMaster-1.pkg.I.tar.gz": {
+      "sha256": "4d5d30f7b62d950eec7338fade464c4873ee6214fc013798107df37766531eea",
+      "components": [
+        "EIDEBusMaster"
+      ],
+      "internal_hashes_verified": true
+    },
+    "OpenStepVirtioServices-0.1.pkg.I.tar.gz": {
+      "sha256": "5dba0934b814a6683df46bc44a61d77d71404ed18466f4a00ee1af43753e5448",
+      "components": [
+        "VirtioConsole",
+        "OpenStepVirtioServices"
+      ],
+      "internal_hashes_verified": true
+    },
+    "TCPBuffers-0.1.pkg.I.tar.gz": {
+      "sha256": "28ed7469b85e98144bb2f4d1554572da3b878eeb000249f0f72fbc4cb728131a",
+      "components": [
+        "TCPBuffers"
+      ],
+      "internal_hashes_verified": true
+    },
+    "VMTablet-0.2.pkg.I.tar.gz": {
+      "sha256": "6d59dd812b658687a424aea53b3fbb3df271439f6eaad1abfe3ef2c3888f1681",
+      "components": [
+        "VMTablet"
+      ],
+      "internal_hashes_verified": true,
+      "documentation_updated_without_native_rebuild": true
+    },
+    "VMWareFB-0.1.pkg.I.tar.gz": {
+      "sha256": "c74072ea33d5ae3c7e482072f11410636a158d9028a51930f13bcea481a29709",
+      "components": [
+        "VMWareFB"
+      ],
+      "internal_hashes_verified": true
+    },
+    "VirtioBlk-0.1.pkg.I.tar.gz": {
+      "sha256": "8492db73fe5ea3579c5355dc4d585e3f694e4472fffd6cc4d7d60a0cd27d94a3",
+      "components": [
+        "VirtioBlk"
+      ],
+      "internal_hashes_verified": true
+    },
+    "VirtioNet-0.1.pkg.I.tar.gz": {
+      "sha256": "884774ebd801f84cd0f35a9a237d0d5bdd57e8c027ea4b4bd14718aecef7a325",
+      "components": [
+        "VirtioNet"
+      ],
+      "internal_hashes_verified": true
+    },
+    "VirtioRNG-0.1.pkg.I.tar.gz": {
+      "sha256": "13b8f200ca3ca41de22425e95ceaeba0699ca4ac796dac034c8f314d2910e775",
+      "components": [
+        "VirtioRNG"
+      ],
+      "internal_hashes_verified": true
+    }
+  },
+  "driver_floppy": {
+    "filename": "VirtioBlk-0.1-driver.img",
+    "sha256": "23cdbde591b3a3a0a0b7d6abfcc72dd8d9001dc74c090c93fafed294c09a4269",
+    "bytes": 1474560,
+    "filesystem_check_passed": true,
+    "fresh_installation_test": false,
+    "driver_binary_matches_previous_installation_test": true
+  }
+}

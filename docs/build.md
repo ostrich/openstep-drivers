@@ -5,16 +5,16 @@ source tree, keeping generated files out of the checkout.
 
 | Component | Run `make` in | Native package recipe |
 | --- | --- | --- |
-| VMTablet | `components/vmtablet` | `components/vmtablet/package/build-on-openstep.sh` |
-| VMWareFB | `components/vmwarefb` | `components/vmwarefb/package/build-on-openstep.sh` |
-| TCPBuffers | `components/tcp-buffers/TCPBuffers` | `components/tcp-buffers/package/build-on-openstep.sh` |
-| VirtioRNG | `components/virtio/drivers/VirtioRNG` | `components/virtio/package/build-on-openstep.sh` |
-| VirtioNet | `components/virtio/drivers/VirtioNet` | `components/virtio/package-net/build-on-openstep.sh` |
-| VirtioBlk | `components/virtio/drivers/VirtioBlk` | `components/virtio/package-blk/build-on-openstep.sh` |
-| VirtioConsole | `components/virtio/drivers/VirtioConsole` | `components/virtio/package-console/build-on-openstep.sh` |
-| Guest services | `components/virtio/services` | `components/virtio/package-services/build-on-openstep.sh` |
+| VMTablet | `vmtablet` | `vmtablet/package/build-on-openstep.sh` |
+| VMWareFB | `vmwarefb` | `vmwarefb/package/build-on-openstep.sh` |
+| TCPBuffers | `tcp-buffers/TCPBuffers` | `tcp-buffers/package/build-on-openstep.sh` |
+| VirtioRNG | `virtio/VirtioRNG` | `virtio/package/build-on-openstep.sh` |
+| VirtioNet | `virtio/VirtioNet` | `virtio/package-net/build-on-openstep.sh` |
+| VirtioBlk | `virtio/VirtioBlk` | `virtio/package-blk/build-on-openstep.sh` |
+| VirtioConsole | `virtio/VirtioConsole` | `virtio/package-console/build-on-openstep.sh` |
+| Guest services | `virtio/services` | `virtio/package-services/build-on-openstep.sh` |
 
-Keep `components/virtio` together: its drivers include the shared `src/` files
+Keep `virtio` together: its drivers include the shared `src/` files
 by relative paths. Pass that entire directory as SOURCE_ROOT to its native
 package recipes. VMTablet and VMWareFB recipes take their individual component
 directories. Each recipe prints its usage; arguments are absolute guest paths,
