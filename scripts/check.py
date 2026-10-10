@@ -41,7 +41,6 @@ for name, inputs in [
     output = OUT / name
     run([cc, '-std=gnu89', '-Wall', '-Wextra', '-Werror', *inputs, '-o', str(output)])
     run([str(output)])
-for name in ('agent-client-test.py', 'pty-client-test.py', 'pty-terminal-test.py'):
-    run(['python3', 'virtio/tests/' + name])
+run(['python3', 'scripts/check-host-clients.py'])
 run(['python3', 'eide-busmaster/test-package.py'])
 print('Portable source, build-input and protocol checks passed')

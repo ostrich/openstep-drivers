@@ -41,3 +41,14 @@ python3 scripts/check.py
 These checks cover shared queue behavior, framebuffer policy and host client
 protocols. Native compilation, installation, reboot, recovery and sustained I/O
 validation still require an OPENSTEP guest.
+
+CI runs the full portable suite on Linux and host-client protocol/terminal tests
+on macOS. To run only the host-client checks locally:
+
+```sh
+python3 scripts/check-host-clients.py
+```
+
+The macOS terminal test allows XNU's transient PENDIN state after restoring
+canonical input; it still compares all other terminal settings, descriptor
+flags and successful line input. CI does not compile or boot native drivers.

@@ -121,7 +121,21 @@ class Tests(unittest.TestCase):
                     else:
                         raise AssertionError(ending)
                     self.assertEqual(process.wait(timeout=5), expected)
-                    self.assertEqual(termios.tcgetattr(slave), original)
+                    restored = termios.tcgetattr(slave)
+                    expected_attributes = original[:]
+                    if sys.platform == 'darwin':
+                        # XNU sets PENDIN when restoring ICANON with TCSANOW.
+                        # It is pending-input state, not a lost terminal setting.
+                        # https://github.com/apple-oss-distributions/xnu/blob/main/bsd/kern/tty.c
+                        restored[3] &= ~termios.PENDIN
+                        expected_attributes[3] &= ~termios.PENDIN
+                    self.assertEqual(restored, expected_attributes)
+                    # Verify usable canonical input after every exit path,
+                    # including the kernel's pending-input processing on macOS.
+                    os.write(master, b'restored input\n')
+                    readable, _, _ = select.select([slave], [], [], 2)
+                    self.assertEqual(readable, [slave], 'Restored terminal cannot read a line')
+                    self.assertEqual(os.read(slave, 1024), b'restored input\n')
                     self.assertEqual(fcntl.fcntl(slave, fcntl.F_GETFL), flags)
                     if ending == 'exit':
                         output = bytearray()
