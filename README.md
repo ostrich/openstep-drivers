@@ -8,11 +8,6 @@ directly from the host without setting up guest networking.
 Download the installable packages from [GitHub Releases](https://github.com/ostrich/openstep-drivers/releases/latest).
 Developer Tools are needed only to build from source.
 
-**For QEMU with KVM, [KernelMappingFix](kernel-mapping-fix/README.md) is strongly
-recommended.** On affected hosts, KVM exposes an OPENSTEP mapping bug that can
-cause intermittent checksum and process-start failures. Equivalent TCG control
-tests did not reproduce these failures.
-
 | Component | What you gain | Installation |
 | --- | --- | --- |
 | VMTablet 0.2 | Aligned host/guest pointer and natural mouse exit/re-entry in GTK | [README](vmtablet/package/README.distribution.txt) |
@@ -22,7 +17,7 @@ tests did not reproduce these failures.
 | VirtioBlk 0.1 | Faster reads in matched KVM tests and direct virtio system boot | [README](virtio/package-blk/README.txt) |
 | OpenStepVirtioServices 0.1 | File transfer, command execution and a shell without guest networking | [README](virtio/package-services/README.txt) |
 | TCPBuffers 0.1 | Higher bulk TCP throughput without tuning each application | [README](tcp-buffers/package/README.txt) |
-| KernelMappingFix 0.1-1 | Corrects stale mapping behavior behind observed checksum/startup failures, without replacing the kernel | [README](kernel-mapping-fix/README.md) |
+| KernelMappingFix 0.1-1 | Strongly recommended for QEMU/KVM: fixes stale mappings behind observed checksum/startup failures without replacing the kernel | [README](kernel-mapping-fix/README.md) |
 | EIDE 4.03 bus-master patch | DMA transfers on existing IDE disks without a launcher workaround | [README](eide-busmaster/README.distribution.txt) |
 
 Install packages with OPENSTEP's Installer as root, then configure the device
