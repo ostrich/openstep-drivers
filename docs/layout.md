@@ -17,6 +17,7 @@ virtio/
   package*/       Native Installer recipes and installation READMEs
 tcp-buffers/       TCP defaults module and package
 eide-busmaster/    Binary patcher, package recipe and tests
+kernel-mapping-fix/ Boot-time kernel fix, package tooling and tests
 scripts/          Repository checks and driver-floppy builder
 docs/             Build, installation and release documentation
 dist/             Generated downloads, ignored by Git

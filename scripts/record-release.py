@@ -78,9 +78,9 @@ def main():
         archive.with_name(archive.name+'.sha256').write_text(checksum+'  '+archive.name+'\n')
         receipt['archives'][archive.name] = {'sha256': checksum, 'components': names,
                                            'internal_hashes_verified': True}
-    assert len(receipt['archives']) == 8, 'Expected eight driver/service distributions'
+    assert receipt['archives'], 'No driver/service distributions found'
     args.receipt.write_text(json.dumps(receipt, indent=2)+'\n')
-    print('Recorded and verified eight archives from snapshot '+snapshot)
+    print('Recorded and verified '+str(len(receipt['archives']))+' archives from snapshot '+snapshot)
 
 
 if __name__ == '__main__':

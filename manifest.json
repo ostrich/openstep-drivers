@@ -66,6 +66,17 @@
       "package": "virtio/package-services/build-on-openstep.sh",
       "distribute": "virtio/tools/assemble-services-distribution.py",
       "archive": "OpenStepVirtioServices-0.1.pkg.I.tar.gz"
+    },
+    {
+      "name": "kernel-mapping-fix",
+      "root": "kernel-mapping-fix",
+      "build": "kernel-mapping-fix/module/Makefile",
+      "package": "kernel-mapping-fix/package.py",
+      "distribute": "kernel-mapping-fix/package.py",
+      "archive": "KernelMappingFix-0.1-1.pkg.I.tar.gz",
+      "generated_inputs": [
+        "kernel-mapping-fix/module/patch-inputs.h"
+      ]
     }
   ]
 }

@@ -4,6 +4,9 @@ Licenses apply per component. There is no repository-wide license overriding
 upstream terms.
 
 - Virtio drivers and services use the [MIT license](../virtio/LICENSE).
+- KernelMappingFix module and new patch tooling use the [MIT license](../kernel-mapping-fix/LICENSE).
+  The source-equivalent diff does not change the licensing of the historical
+  kernel source it targets.
 - TCPBuffers uses the [MIT license](../tcp-buffers/LICENSE).
 - VMWareFB derives from Atomic Object's
   [VMWareFB_OpenStep](https://github.com/atomicobject/VMWareFB_OpenStep).

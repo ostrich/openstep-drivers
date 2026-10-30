@@ -1,0 +1,12 @@
+"Title" = "Kernel Mapping Fix";
+"Family" = "Other";
+"Version" = "0.1";
+"Instance" = "0";
+"Driver Name" = "KernelMappingFix";
+"Server Name" = "KernelMappingFix";
+"Class Names" = "KernelMappingFix";
+"IRQ Levels" = "";
+"I/O Ports" = "";
+"Memory Maps" = "";
+"DMA Channels" = "";
+"Apply Mapping Fix" = "Yes";

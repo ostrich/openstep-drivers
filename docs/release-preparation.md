@@ -1,5 +1,10 @@
 # Release preparation
 
+The 2026-10-30 release adds KernelMappingFix 0.1-1. Its native module, package,
+KVM/TCG boot behavior and removal hook were tested separately; see the
+[validation record](kernel-mapping-fix-validation.json). Existing downloads
+retain their 2026-10-10 bytes and validation.
+
 The 2026-10-10 rebuild uses the flattened source tree and current installation
 READMEs. All eight native driver/service packages were rebuilt with OPENSTEP's
 Developer Tools; EIDE was repackaged from the verified original driver and
@@ -21,8 +26,8 @@ Future release work:
 3. Decide whether VirtioBlk should continue bundling firmware or use only the
    firmware shipped by openstep-qemu.
 
-Versions remain unchanged. Local downloads are under `dist/`; binary downloads
-belong in Releases, not Git history. The older [package reconciliation record](package-reconciliation.json)
+Existing driver versions remain unchanged. Local downloads are under `dist/`;
+binary downloads belong in Releases, not Git history. The older [package reconciliation record](package-reconciliation.json)
 describes the earlier EIDE/services repair, not this rebuilt release.
 
 ## Efficient rebuilds

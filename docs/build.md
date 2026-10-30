@@ -14,6 +14,11 @@ source tree, keeping generated files out of the checkout.
 | VirtioConsole | `virtio/VirtioConsole` | `virtio/package-console/build-on-openstep.sh` |
 | Guest services | `virtio/services` | `virtio/package-services/build-on-openstep.sh` |
 
+KernelMappingFix uses the native compiler and `kl_ld` for its module. Generate
+its fingerprint header from your own supported kernel on Linux first, then
+package the native output with the host `nextpkg` tool from nextstep-toolchain.
+See its [build instructions](../kernel-mapping-fix/README.md#build).
+
 Keep `virtio` together: its drivers include the shared `src/` files
 by relative paths. Pass that entire directory as SOURCE_ROOT to its native
 package recipes. VMTablet and VMWareFB recipes take their individual component

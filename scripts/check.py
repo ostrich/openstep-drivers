@@ -11,13 +11,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'work/checks'
 OUT.mkdir(parents=True, exist_ok=True)
+MANIFEST = json.loads((ROOT / 'manifest.json').read_text())['components']
+COMPONENT_DIRS = sorted({entry['root'] for entry in MANIFEST})
+GENERATED_INPUTS = {ROOT / name for entry in MANIFEST for name in entry.get('generated_inputs', [])}
 
 
 def run(command):
     subprocess.run(command, cwd=ROOT, check=True)
 
 
-for path in (p for name in ('vmtablet', 'vmwarefb', 'virtio', 'tcp-buffers', 'eide-busmaster') for p in (ROOT/name).rglob('*')):
+for path in (p for name in COMPONENT_DIRS for p in (ROOT/name).rglob('*')):
     if not path.is_file() or '__pycache__' in path.parts:
         continue
     if path.suffix == '.py':
@@ -26,11 +29,11 @@ for path in (p for name in ('vmtablet', 'vmwarefb', 'virtio', 'tcp-buffers', 'ei
         run(['sh', '-n', str(path)])
     elif path.suffix in ('.m', '.c', '.h'):
         for name in re.findall(r'^\s*#\s*include\s*"([^"]+)"', path.read_text(), re.M):
-            assert (path.parent / name).is_file(), f'{path}: missing include {name}'
-for entry in json.loads((ROOT / 'manifest.json').read_text())['components']:
+            assert (path.parent / name).is_file() or (path.parent / name) in GENERATED_INPUTS, f'{path}: missing include {name}'
+for entry in MANIFEST:
     for key in ('root', 'build', 'package', 'distribute'):
         assert (ROOT / entry[key]).exists(), f'{entry["name"]}: missing {key}'
-for path in [ROOT/'README.md', *ROOT.joinpath('docs').glob('*.md'), *(p for name in ('vmtablet', 'vmwarefb', 'virtio', 'tcp-buffers', 'eide-busmaster') for p in (ROOT/name).rglob('README.md'))]:
+for path in [ROOT/'README.md', *ROOT.joinpath('docs').glob('*.md'), *(p for name in COMPONENT_DIRS for p in (ROOT/name).rglob('README.md'))]:
     for target in re.findall(r'\]\(([^)]+)\)', path.read_text()):
         if not target.startswith(('https:', 'http:', '#')):
             assert (path.parent / target.split('#')[0]).exists(), f'{path}: broken link {target}'
@@ -51,4 +54,5 @@ if sys.platform == 'linux':
     run([str(output)])
 run(['python3', 'scripts/check-host-clients.py'])
 run(['python3', 'eide-busmaster/test-package.py'])
+run(['python3', 'kernel-mapping-fix/test-configure.py'])
 print('Portable source, build-input and protocol checks passed')

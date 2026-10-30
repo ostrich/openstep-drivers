@@ -1,0 +1,4 @@
+patch-inputs.h
+*.o
+KernelMappingFix.config/
+kernel-mapping-fixctl

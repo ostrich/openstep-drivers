@@ -1,0 +1,66 @@
+Subject: i386: invalidate removed mappings before reusing their resources
+
+--- a/machdep/i386/pmap.c
++++ b/machdep/i386/pmap.c
+@@ -857,6 +857,9 @@
+ 	UNLOCK_PVH(pd);
+     }
+ 
++    /* Flush after clearing PTEs, before mapping resources can be reused. */
++    PMAP_UPDATE_TLBS(pmap, start, end);
++
+     /*
+      * Free the mappings from the page table.
+      */	
+@@ -887,10 +890,7 @@
+ 
+     PMAP_READ_LOCK(pmap, s);
+ 
+-    /*
+-     * Invalidate the translation buffer first
+-     */
+-    PMAP_UPDATE_TLBS(pmap, start, end);
++    /* pmap_remove_range invalidates after clearing its PTEs. */
+     
+     while (start < end) {
+ 	sect_end = round_section(start + PAGE_SIZE);
+@@ -1583,6 +1583,10 @@
+ 	    for (i = ptes_per_vm_page; i-- > 0; pde++)
+ 		pde->valid = 0;
+ 		
++	    /* A retired PDE must not remain cached when its table is reused. */
++	    PMAP_UPDATE_TLBS(pmap, trunc_section(va),
++	        round_section(va + PAGE_SIZE));
++
+ 	    pt_active_remove(pe);
+ 	    
+ 	    pt_free_add(pe);
+--- a/machdep/i386/cpu_inline.h
++++ b/machdep/i386/cpu_inline.h
+@@ -176,7 +176,8 @@
+     asm volatile("
+ 	mov %0,%%cr3"
+ 	    :
+-	    : "r" (value));
++	    : "r" (value)
++	    : "memory");
+ }
+ 
+ static inline
+@@ -199,12 +200,14 @@
+ 	asm volatile("
+ 	    invlpg %0"
+ 		:
+-		: "m" (*(unsigned char *)addr));
++		: "m" (*(unsigned char *)addr)
++		: "memory");
+     else
+ 	asm volatile("
+ 	    invlpg %%fs:%0"
+ 		:
+-		: "m" (*(unsigned char *)addr));
++		: "m" (*(unsigned char *)addr)
++		: "memory");
+ }
+ 
+ static inline

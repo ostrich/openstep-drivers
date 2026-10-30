@@ -17,6 +17,7 @@ Developer Tools are needed only to build from source.
 | VirtioBlk 0.1 | Faster reads in matched KVM tests and direct virtio system boot | [README](virtio/package-blk/README.txt) |
 | OpenStepVirtioServices 0.1 | File transfer, command execution and a shell without guest networking | [README](virtio/package-services/README.txt) |
 | TCPBuffers 0.1 | Higher bulk TCP throughput without tuning each application | [README](tcp-buffers/package/README.txt) |
+| KernelMappingFix 0.1-1 | Corrects stale mapping behavior behind observed checksum/startup failures, without replacing the kernel | [README](kernel-mapping-fix/README.md) |
 | EIDE 4.03 bus-master patch | DMA transfers on existing IDE disks without a launcher workaround | [README](eide-busmaster/README.distribution.txt) |
 
 Install packages with OPENSTEP's Installer as root, then configure the device
