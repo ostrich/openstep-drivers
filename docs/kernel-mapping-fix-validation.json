@@ -16,7 +16,7 @@
   "native_malformed_config_failure_status_passed": true,
   "removal_hook_disables_next_boot": true,
   "disabled_reboot_stock_code": true,
-  "archive_sha256": "952e11eaff24b4a09d0ad108957f77e29c3004317dc0ff9bcd9b72599a6d5207",
+  "archive_sha256": "234560bd4890badf40e4d458bd6b00399a4bcdb450e0aac0e9b066d6397a8488",
   "package": "KernelMappingFix-0.1-1.pkg.I.tar.gz",
   "native_build": "OPENSTEP 4.2 Intel Developer Tools",
   "source_sha256": {
@@ -27,15 +27,14 @@
     "kernel-mapping-fix/module/LICENSE": "d5e0585faa1fc98e347842df1edfb325f4be4e64ff3fb59780863b85d5d669ff",
     "kernel-mapping-fix/module/Load_Commands.sect": "9047b4f00a8bd970ce6b0027e6a86405f2ab0a295e6e8f6890ce86c9b29c4f77",
     "kernel-mapping-fix/module/Makefile": "013c48e94fd71fb0813034deaa6dc98d7c3b4d0f1109976c96b27298f0d3e283",
-    "kernel-mapping-fix/module/README.txt": "c70f5063de4bf717389a26e6c4e0c245db8b3c500867cc6f88261c2afa5fe513",
+    "kernel-mapping-fix/module/README.txt": "b0c0124866e0923c93aa827f5dc2e0782f1ea80ceeb0762695eacd88fb3926d7",
     "kernel-mapping-fix/module/configure-guest.sh": "9d63fc000e22392ed76651af58bbb445df5d9a28184684ddbdd11dc07b9e2823",
     "kernel-mapping-fix/module/kernel-mapping-fixctl.m": "43d99efac86e06de2d656bd7b8bdd47d243afec745ae1b64a02b456c8f6db54f",
     "kernel-mapping-fix/module/sha256.h": "bd3676a4594cc2d34eccdf55c4e5be2d64cf249c84566989b5d02fe7b5c32915"
   },
-  "public_package_reproduces_tested_archive": true,
   "component_source_sha256": {
     "kernel-mapping-fix/LICENSE": "d5e0585faa1fc98e347842df1edfb325f4be4e64ff3fb59780863b85d5d669ff",
-    "kernel-mapping-fix/README.md": "73e254e93b4ac83a509c6e4c5246d6837dddf4c343e468d23172c35d6b63f018",
+    "kernel-mapping-fix/README.md": "7fe040ff5ee8eb239ee2bba4f80dc66a2112674ab9d3909a94285aeceb90b6b8",
     "kernel-mapping-fix/generate-module-inputs.py": "f4bcd4dcbfc70d406f9384443a54befc6ae371f419fb745fa087e4426ec45cce",
     "kernel-mapping-fix/invalidation.S": "196a384df8bdbd7595d1e53374382425277b9587837995ae2433cb4465fbb88f",
     "kernel-mapping-fix/module/.gitignore": "1cae9530bbbfa39971178ad6ec5e453b03cff5a1f5b123df758e9468dc920e52",
@@ -45,7 +44,7 @@
     "kernel-mapping-fix/module/LICENSE": "d5e0585faa1fc98e347842df1edfb325f4be4e64ff3fb59780863b85d5d669ff",
     "kernel-mapping-fix/module/Load_Commands.sect": "9047b4f00a8bd970ce6b0027e6a86405f2ab0a295e6e8f6890ce86c9b29c4f77",
     "kernel-mapping-fix/module/Makefile": "013c48e94fd71fb0813034deaa6dc98d7c3b4d0f1109976c96b27298f0d3e283",
-    "kernel-mapping-fix/module/README.txt": "c70f5063de4bf717389a26e6c4e0c245db8b3c500867cc6f88261c2afa5fe513",
+    "kernel-mapping-fix/module/README.txt": "b0c0124866e0923c93aa827f5dc2e0782f1ea80ceeb0762695eacd88fb3926d7",
     "kernel-mapping-fix/module/configure-guest.sh": "9d63fc000e22392ed76651af58bbb445df5d9a28184684ddbdd11dc07b9e2823",
     "kernel-mapping-fix/module/kernel-mapping-fixctl.m": "43d99efac86e06de2d656bd7b8bdd47d243afec745ae1b64a02b456c8f6db54f",
     "kernel-mapping-fix/module/sha256.h": "bd3676a4594cc2d34eccdf55c4e5be2d64cf249c84566989b5d02fe7b5c32915",
@@ -54,5 +53,6 @@
     "kernel-mapping-fix/patch.py": "4e65e1adaef1ecc804ab47ae2a98b7aabc1a1c0277e8f57416a7ac466a519b2e",
     "kernel-mapping-fix/test-configure.py": "99d36897f7170d865e41f66dc4e06c701b8166c34de0688d7ca818c3c6057632",
     "kernel-mapping-fix/test-patch.py": "c3542a2da993fb90b34d958f215e365f28216d9d265ceb9d09761f6afeab1c63"
-  }
+  },
+  "native_payload_matches_tested_build": true
 }
