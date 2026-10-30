@@ -5,6 +5,10 @@ failures observed in OPENSTEP 4.2 under hardware virtualization. It applies the
 fix in memory through a small DriverKit module, leaving the original kernel
 file unchanged. It does not require a particular disk, network or video driver.
 
+**Especially important for QEMU/KVM: installing this fix is strongly
+recommended.** Failures were reproduced under KVM on an affected host, while
+equivalent TCG control workloads passed. The module works with both KVM and TCG.
+
 ## Install
 
 Download `KernelMappingFix-0.1-1.pkg.I.tar.gz` from

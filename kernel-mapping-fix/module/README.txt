@@ -1,5 +1,10 @@
 Kernel Mapping Fix 0.1-1
 
+Especially important with QEMU/KVM: installing this fix is strongly
+recommended. On affected hosts, KVM exposes an OPENSTEP mapping bug that can
+cause intermittent checksum and process-start failures. Equivalent TCG control
+tests did not reproduce them. The module works with both KVM and TCG.
+
 Prevents stale memory translations when OPENSTEP 4.2 removes mappings on
 modern Intel-compatible processors. The fix is applied to memory by a
 loadable driver. It never changes /mach_kernel or another kernel file.

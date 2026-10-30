@@ -8,6 +8,11 @@ directly from the host without setting up guest networking.
 Download the installable packages from [GitHub Releases](https://github.com/ostrich/openstep-drivers/releases/latest).
 Developer Tools are needed only to build from source.
 
+**For QEMU with KVM, [KernelMappingFix](kernel-mapping-fix/README.md) is strongly
+recommended.** On affected hosts, KVM exposes an OPENSTEP mapping bug that can
+cause intermittent checksum and process-start failures. Equivalent TCG control
+tests did not reproduce these failures.
+
 | Component | What you gain | Installation |
 | --- | --- | --- |
 | VMTablet 0.2 | Aligned host/guest pointer and natural mouse exit/re-entry in GTK | [README](vmtablet/package/README.distribution.txt) |
